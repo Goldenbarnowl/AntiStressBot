@@ -4,7 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove, FSInputFile, CallbackQuery
 
 from config import bot
-from src.keyboard import menu_keyboard_maker, menu_slovar, faq_keyboard_maker, faq_answers
+from src.keyboard import menu_keyboard_maker, menu_slovar, faq_keyboard_maker, faq_answers, courses_keyboard_maker
 from src.states import UserStates
 
 user_router = Router()
@@ -27,9 +27,17 @@ async def faq(message: Message, state: FSMContext):
         reply_markup=faq_keyboard_maker()
     )
 
-@user_router.callback_query(UserStates.menu)
+@user_router.callback_query(UserStates.menu, F.data.in_(faq_answers.keys()))
 async def answers(callback_query: CallbackQuery, state: FSMContext):
     await bot.send_message(
         chat_id=callback_query.from_user.id,
         text=faq_answers[callback_query.data]
+    )
+
+@user_router.message(UserStates.menu, F.text == menu_slovar["buttonkey2"])
+async def courses(message: Message, state: FSMContext):
+    await bot.send_message(
+        chat_id=message.chat.id,
+        text=f"Вот тебе курсы",
+        reply_markup=courses_keyboard_maker()
     )
