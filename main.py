@@ -14,7 +14,7 @@ from src.router_tests.main_test_router import test_router
 
 async def start():
     dp.include_router(user_router)
-    user_router.include_routers(course_one_router, course_two_router)
+    user_router.include_routers(course_one_router)
     dp.include_router(test_router)
     dp.include_router(last_stand_router)
     try:
