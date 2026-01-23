@@ -5,6 +5,7 @@ from pydantic_settings import BaseSettings
 
 class Secrets(BaseSettings):
     token: str
+    bitrix: str
 
     class Config:
         env_file = ".env"
@@ -12,6 +13,8 @@ class Secrets(BaseSettings):
 
 
 secrets = Secrets()
+
+WEBHOOK_URL = secrets.bitrix
 
 # Инициализация бота
 default = DefaultBotProperties(parse_mode='HTML', protect_content=False)

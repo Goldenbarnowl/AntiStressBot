@@ -1,10 +1,10 @@
-from aiogram.types import KeyboardButton, InlineKeyboardButton
+from aiogram.types import KeyboardButton, InlineKeyboardButton, WebAppInfo
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 
 
-hello_slovar = {"hello": "Привет, давай познакомимся 👋", "female": "👩 Женщина‍", "male": "👨 Мужчина"}
+hello_slovar = {"hello": "Я согласен на обработку персональных данных 👋", "female": "👩 Женщина‍", "male": "👨 Мужчина"}
 yesorno_slovar = {"yes": "Да", "no": "Нет"}
-menu_slovar = {"buttonkey1": "👁 Тестирование", "buttonkey2": "💡 Курсы", "buttonkey3": "❓ Задайте вопрос",}
+menu_slovar = {"buttonkey1": "👁 Тестирование", "buttonkey2": "💡 Курсы", "buttonkey3": "❓ Задайте вопрос", "buttonkey4": "❤️ О Нас"}
 faqs = {"faq1": "Чем ты можешь мне помочь?", "faq2": "Это бесплатно?", "faq3": "Зачем нужно тестирование?"}
 faq_answers = {"faq1": """Со мной ты можешь:
 лучше понять свое психологическое состояние, пройдя тестирование
@@ -20,7 +20,7 @@ courses_slovar = {"course1": "Онлайн-курс «Терапия творч�
 
 def hello_button():
     builder = ReplyKeyboardBuilder()
-    button = KeyboardButton(text=hello_slovar["hello"])
+    button = KeyboardButton(text=hello_slovar["hello"], request_contact=True)
     builder.row(button)
     return builder.as_markup(resize_keyboard=True, is_persistent=True)
 
@@ -51,6 +51,8 @@ def menu_keyboard_maker():
     builder.row(button2)
     button3 = KeyboardButton(text=menu_slovar["buttonkey3"])
     builder.row(button3)
+    button4 = KeyboardButton(text=menu_slovar["buttonkey4"], web_app=WebAppInfo(url="https://antistress-bot.bitrix24site.ru/"))
+    builder.row(button4)
     return builder.as_markup(resize_keyboard=True, is_persistent=True)
 
 

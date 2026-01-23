@@ -9,7 +9,7 @@ class UserStates(StatesGroup):
     swo_family_role = State()
     menu = State()
     main_test = State()
-
+    wait_phone_number = State()
 
 class SpielbergerTest(StatesGroup):
     st_answers = State()      # список из 20 ответов (1-4)

@@ -7,6 +7,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from config import bot
 from src.keyboard import menu_keyboard_maker
+from src.router import bx_call
 from src.states import UserStates, SpielbergerTest
 
 test_router = Router()
@@ -222,5 +223,14 @@ async def process_lt_answer(call: CallbackQuery, state: FSMContext):
             reply_markup=menu_keyboard_maker()
         )
         await state.set_state(UserStates.menu)
+        contacts = bx_call("crm.contact.list", {
+            "select": ["ID", "UF_CRM_1769171592608"],
+            "start": 0
+        })
+        for contact in contacts:
+            if contact['UF_CRM_1769171592608'] == str(call.from_user.id):
+                print(1)
+                bx_call("crm.contact.update", {'id': contact["ID"], 'fields': {"UF_CRM_1769174238793": lt_score, "UF_CRM_1769174257124": st_score}})
+
 
     await call.answer()
