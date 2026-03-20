@@ -177,24 +177,25 @@ async def swo_family(message: Message, state: FSMContext):
 Я антистресс-бот помощник Пумпо. 
 Меня придумала команда квалифицированных психологов для помощи тем, кто очень устал и переживает сильный стресс.""",
     )
-    await asyncio.sleep(1)
-    await bot.send_message(
-        chat_id=message.chat.id,
-        text="""Общаясь со мной, вы можете:
-        🟠 Пройти психологическое тестирование
-        🟠 Узнать пошаговые рекомендации для самопомощи
-        🟠 Пройти обучающие курсы 
-        🟠 Получить контакты квалифицированных психологов и психологических центров
-        """
-    )
-    await bot.send_message(
-            chat_id=message.chat.id,
-            text="""Крепко обнимаю ❤️‍🩹
-Внизу кнопки — тут ты можешь пройти психологический тест, задать мне любой вопрос, получить техники или найти специалиста.
-Выбирай, что нужно прямо сейчас:""",
-            reply_markup=menu_keyboard_maker()
-        )
-    await state.set_state(UserStates.menu)
+     await asyncio.sleep(1)
+     await bot.send_message(
+         chat_id=message.chat.id,
+         text="""Общаясь со мной, вы можете:
+             🟠 Пройти психологическое тестирование
+             🟠 Узнать пошаговые рекомендации для самопомощи
+             🟠 Пройти обучающие курсы 
+             🟠 Получить контакты квалифицированных психологов и психологических центров
+             """
+     )
+     await bot.send_message(
+         chat_id=message.chat.id,
+         text="""Крепко обнимаю ❤️‍🩹
+     Внизу кнопки — тут ты можешь пройти психологический тест, задать мне любой вопрос, получить техники или найти специалиста.
+     Выбирай, что нужно прямо сейчас:""",
+         reply_markup=menu_keyboard_maker()
+     )
+     await state.set_state(UserStates.menu)
+    
    
 
 @user_router.message(UserStates.menu, F.text == menu_slovar["buttonkey3"])
